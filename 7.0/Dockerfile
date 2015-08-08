@@ -17,7 +17,8 @@ RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys E3036906AD9F30807351F
 
 # https://doc.owncloud.org/server/8.1/admin_manual/installation/source_installation.html#prerequisites
 RUN docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
-	&& docker-php-ext-install gd intl mbstring mcrypt mysql pdo_mysql pdo_pgsql pgsql zip
+	&& docker-php-ext-install gd intl mbstring mcrypt mysql pdo_mysql pdo_pgsql pgsql zip \
+	&& pecl install redis && echo extension=redis.so > /usr/local/etc/php/conf.d/redis.ini
 
 ENV OWNCLOUD_VERSION 7.0.7
 VOLUME /var/www/html
